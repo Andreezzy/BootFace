@@ -10,8 +10,8 @@ app.config.from_object(DevelopmentConfig)
 @app.route('/webhook', methods = ['GET'])
 def webhook():
 	print(app.config['SECRET_KEY'])
-	very_token = request.args.get('hub.very_token', '')
-	if very_token == app.config['SECRET_KEY']:
+	verify_token = request.args.get('hub.verify_token', '')
+	if verify_token == app.config['SECRET_KEY']:
 		return request.args.get('hub.challenge', '')
 	return 'Error'
 
