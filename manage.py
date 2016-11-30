@@ -5,6 +5,8 @@ from flask import request
 import json
 from config import DevelopmentConfig
 
+from handler import recived_message
+
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 
@@ -23,8 +25,9 @@ def webhook():
 			for message_event in page_entry['messaging']:
 
 				if 'message' in message_event:
-					evento = message_event['message']
-					print(evento['text'])
+					recived_message(message_event)
+					#evento = message_event['message']
+					#print(evento['text'])
 		return "ok"
 
 @app.route('/', methods = ['GET'])
