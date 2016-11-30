@@ -24,7 +24,7 @@ def webhook():
 
 				if 'message' in message_event:
 					evento = message_event['message']
-					print evento['text']
+					print(evento['text'])
 		return "ok"
 
 @app.route('/', methods = ['GET'])
