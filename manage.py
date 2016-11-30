@@ -23,9 +23,8 @@ def webhook():
 
 		for page_entry in data['entry']:
 			for message_event in page_entry['messaging']:
-
 				if 'message' in message_event:
-					recived_message(message_event)
+					recived_message(message_event, app.config['SECRET_KEY'])
 					#evento = message_event['message']
 					#print(evento['text'])
 		return "ok"
