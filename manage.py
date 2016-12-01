@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, url_for, render_template
 from flask import request
 
 import json
@@ -33,7 +33,8 @@ def webhook():
 
 @app.route('/', methods = ['GET'])
 def index():
-	return 'Hola al curso de Bot!'
+	url_for('static', filename='style.css')
+	return render_template('index.html')
 
 if __name__ == '__main__':
 	port = int(os.environ.get("PORT", 5000))
