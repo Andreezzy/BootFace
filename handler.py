@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import requests
 import json
 
@@ -13,7 +16,11 @@ def recived_message(event, token):
 	typing = typing_message(sender_id)
 	call_send_API(typing, token)
 
-	message = text_message(sender_id, text)
+	user = call_user_API(sender_id, token)
+	first_name = user['first_name']
+	message = "Hola {}, como estas?".format(first_name)
+
+	message = text_message(sender_id, message)
 	call_send_API(message, token)
 
 
@@ -26,3 +33,10 @@ def call_send_API( data, token ):
 					)
 	if res.status_code == 200:
 		print("El mensaje fue enviado exitosamente!")
+
+def call_user_API(user_id, token):
+	res = requests.get('https://graph.facebook.com/v2.6/' + user_id,
+					params = {'access_token': token } )
+
+	data = json.loads(res.text)
+	return data
