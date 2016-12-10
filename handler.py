@@ -1,4 +1,5 @@
-import sys reload(sys) sys.setdefaultencoding('utf8')
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import requests
 import json
 
