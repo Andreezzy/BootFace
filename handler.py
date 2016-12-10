@@ -1,6 +1,8 @@
 import requests
 import json
 
+from structs import typing_message, text_message
+
 def recived_message(event, token):
 	sender_id = event['sender']['id']
 	recipient_id = event['recipient']['id']
@@ -14,19 +16,7 @@ def recived_message(event, token):
 	message = text_message(sender_id, text)
 	call_send_API(message, token)
 
-def typing_message(recipient_id):
-	message_data = {
-		'recipient': { 'id' : recipient_id },
-		'sender_action' : 'typing_on'
-	}
-	return message_data
 
-def text_message(recipient_id, message_text):
-	message_data = {
-		'recipient': { 'id' : recipient_id },
-		'message' : { 'text' : message_text }
-	}
-	return message_data
 
 def call_send_API( data, token ):
 	res = requests.post('https://graph.facebook.com/v2.6/me/messages',
