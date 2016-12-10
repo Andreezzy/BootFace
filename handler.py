@@ -8,8 +8,18 @@ def recived_message(event, token):
 	message = event['message']
 	text = message['text']
 
+	typing = typing_message(sender_id)
+	call_send_API(typing, token)
+
 	message = text_message(sender_id, text)
 	call_send_API(message, token)
+
+def typing_message(recipient_id):
+	message_data = {
+		'recipient': { 'id' : recipient_id },
+		'sender_action' : { 'typing_on' }
+	}
+	return message_data
 
 def text_message(recipient_id, message_text):
 	message_data = {
